@@ -1,0 +1,35 @@
+<svg width="200" height="210" viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Background dark card -->
+  <rect width="200" height="200" rx="36" fill="#0A0A0A" style="fill:rgb(10, 10, 10);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Layer 3 — deepest shadow (bottom-right offset) -->
+  <rect x="54" y="54" width="110" height="110" rx="22" fill="#1a2a6e" opacity="0.5" style="fill:rgb(26, 42, 110);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Layer 2 — mid layer -->
+  <rect x="46" y="46" width="110" height="110" rx="22" fill="#2a3f9e" opacity="0.7" style="fill:rgb(42, 63, 158);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Layer 1 — top face -->
+  <rect x="38" y="38" width="110" height="110" rx="22" fill="#4F6EF7" style="fill:rgb(79, 110, 247);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Top face shine line -->
+  <rect x="38" y="38" width="110" height="18" rx="22" fill="#6B85FF" opacity="0.4" style="fill:rgb(107, 133, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- N letter on top face — white bold geometric -->
+  <path d="M60 124 L60 72 L72 72 L116 108 L116 72 L128 72 L128 124 L116 124 L72 88 L72 124 Z" fill="#ffffff" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Right side face of 3D box -->
+  <polygon points="148,60 160,72 160,160 148,148" fill="#1e3a8a" opacity="0.9" style="fill:rgb(30, 58, 138);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.9;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Bottom face of 3D box -->
+  <polygon points="48,148 148,148 160,160 60,160" fill="#1e3a8a" opacity="0.7" style="fill:rgb(30, 58, 138);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Accent dot — glowing top right -->
+  <circle cx="152" cy="48" r="10" fill="#0A0A0A" style="fill:rgb(10, 10, 10);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="152" cy="48" r="7" fill="#6B85FF" style="fill:rgb(107, 133, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="152" cy="48" r="4" fill="#ffffff" opacity="0.8" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.8;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Bottom label -->
+  <text font-family="'Roboto', sans-serif" font-size="13" font-weight="700" fill="#4F6EF7" text-anchor="middle" x="100" y="188" letter-spacing="4" style="fill:rgb(79, 110, 247);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Roboto, sans-serif;font-size:13px;font-weight:700;text-anchor:middle;dominant-baseline:auto">NEXORA</text>
+
+</svg>

@@ -139,7 +139,6 @@ export default function ChatWindow({ roomId, userId, onOpenProfile }: ChatViewPr
                                     ? "bg-red-500/10 border-red-500/30"
                                     : "bg-[#141414] border-[#202020]"
                                     }`}>
-                                    {/* ✅ Icon */}
                                     {msg.callStatus === "missed" ? (
                                         <PhoneMissed size={16} className="text-red-400 flex-shrink-0" />
                                     ) : msg.callType === "video" ? (
@@ -162,8 +161,6 @@ export default function ChatWindow({ roomId, userId, onOpenProfile }: ChatViewPr
                             </div>
                         )
                     }
-
-                    // ✅ Normal text message
                     return (
                         <div
                             key={msg.id}

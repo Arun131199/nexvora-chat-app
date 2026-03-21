@@ -11,4 +11,7 @@ export interface Message {
     senderAvatar?: string;
     receiverName: string;
     isOnline: boolean;
+    callType?: "video" | "audio";
+    callStatus?: "missed" | "ended" | "rejected";
+    callDuration?: number;
 }

@@ -1,9 +1,10 @@
 import { Building, Building2, CircleCheck, Lock, Mail, Shield } from 'lucide-react'
 import CustomeInputField from '../../components/CustomeInputField'
 import CustomButton from '../../components/CustomButton'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch'
+import { loginThunk, clearError } from '../../store/slices/authSlice'
 
 interface LoginData {
     email: string;
@@ -16,24 +17,57 @@ export default function Login() {
         email: "",
         password: "",
         isConfirmed: false
-    });
+    })
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
+    const { isLoading, error, currentUser } = useAppSelector(
+        (state) => state.auth
+    )
+
+    // ✅ Already logged in-ஆ இருந்தா redirect
+    useEffect(() => {
+        if (currentUser) {
+            navigate("/dashboard")
+        }
+    }, [currentUser])
+
+    // ✅ Error clear — page load-ல
+    useEffect(() => {
+        dispatch(clearError())
+    }, [])
 
     const handleOnchange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
         setGetLoginData((prev) => ({
             ...prev,
             [name]: value
-        }));
-    };
+        }))
+    }
 
+    // ✅ Submit — API call பண்ணு
+    const handleSubmit = async () => {
+        if (!getLoginData.email || !getLoginData.password) return
 
+        const result = await dispatch(loginThunk({
+            email: getLoginData.email,
+            password: getLoginData.password,
+        }))
 
-    console.log(getLoginData);
+        if (loginThunk.fulfilled.match(result)) {
+            // ✅ isConfirmed — Remember me
+            if (!getLoginData.isConfirmed) {
+                // Session மட்டும் — tab close பண்ணா logout
+                sessionStorage.setItem("token", result.payload.token)
+                localStorage.removeItem("token")
+            }
+            navigate("/dashboard")
+        }
+    }
+
     return (
         <main className="min-h-screen flex items-center justify-center px-4">
             <section className="border border-gray-800 rounded-md bg-[#0b1220] p-6 max-w-md w-full shadow-xl space-y-4">
@@ -53,8 +87,20 @@ export default function Login() {
                     </p>
                 </div>
 
-                <form className='space-y-6'>
+                {/* ✅ Error message */}
+                {error && (
+                    <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3">
+                        <p className="text-red-400 text-sm text-center">{error}</p>
+                    </div>
+                )}
 
+                <form
+                    className='space-y-6'
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                        handleSubmit()
+                    }}
+                >
                     <CustomeInputField
                         name='email'
                         label='Work Email'
@@ -106,9 +152,11 @@ export default function Login() {
                     </div>
 
                     <div className='flex items-center justify-center'>
+                        {/* ✅ Loading spinner */}
                         <CustomButton
-                            label='Continue with company email'
-                            onClick={() => navigate("/dashboard")}
+                            label={isLoading ? "Signing in..." : "Continue with company email"}
+                            onClick={handleSubmit}
+                            disabled={isLoading || !getLoginData.email || !getLoginData.password}
                         />
                     </div>
 
@@ -140,6 +188,5 @@ export default function Login() {
                 </form>
             </section>
         </main>
-
     )
 }

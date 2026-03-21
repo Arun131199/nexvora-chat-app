@@ -6,6 +6,9 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   define: {
-    global: "globalThis"
+    global: "globalThis",
+    'process.env': {},
+    'process.browser': true,
+    'process.version': '"v16.0.0"',
   }
 })

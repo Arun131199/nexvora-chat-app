@@ -1,9 +1,8 @@
-import { X, Mail, Briefcase, Building2, Calendar, Phone, Video } from "lucide-react"
+import { Mail, Briefcase, Building2, Calendar, Phone, Video } from "lucide-react"
 import { useAppDispatch } from "../../hooks/useAppDispatch"
-import { closeProfile } from "../../store/slices/profileSlice"
 import dummyUsers from "../../utils/dummyUsers"
 import dayjs from "dayjs"
-import CustomButton from "../../components/CustomButton"
+
 
 interface ProfilePanelProps {
     userId: string;
@@ -20,12 +19,6 @@ export default function ProfilePanel({ userId, }: ProfilePanelProps) {
         <section className="flex flex-col w-full h-full bg-[#0f1729]/95 backdrop-blur-xl border-l border-gray-700">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800 sticky top-0 bg-[#0f1729]/90 backdrop-blur-md z-10">
                 <p className="text-white font-semibold text-base">Profile</p>
-                {/* <button
-                    onClick={() => dispatch(closeProfile())}
-                    className="p-1.5 rounded-md hover:bg-gray-800 transition"
-                >
-                    <X size={18} className="text-gray-400 hover:text-white" />
-                </button> */}
             </div>
 
             <div className="flex flex-col items-center gap-4 py-8 border-b border-gray-800">
@@ -47,7 +40,7 @@ export default function ProfilePanel({ userId, }: ProfilePanelProps) {
                 </div>
 
                 <div className="flex gap-3 mt-2">
-                   
+
                     <button className="p-2 rounded-lg border border-gray-700 hover:bg-gray-800 transition">
                         <Phone size={18} className="text-gray-300" />
                     </button>
@@ -82,7 +75,6 @@ export default function ProfilePanel({ userId, }: ProfilePanelProps) {
                     </div>
                 </div>
 
-                {/* Joined */}
                 <div className="flex items-start gap-3">
                     <Calendar size={18} className="text-indigo-400 mt-1" />
                     <div>

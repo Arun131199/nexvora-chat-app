@@ -139,14 +139,32 @@ export const useCall = () => {
         isConnectedRef.current = false
         callRef.current?.close()
         peerRef.current?.destroy()
-        localStreamRef.current?.getTracks().forEach((t) => t.stop())
 
-        if (localVideoRef.current) localVideoRef.current.srcObject = null
-        if (remoteVideoRef.current) remoteVideoRef.current.srcObject = null
+        if (localStreamRef.current) {
+            localStreamRef.current.getTracks().forEach((track) => {
+                track.stop() 
+                track.enabled = false
+            })
+            localStreamRef.current = null
+        }
+
+   
+        if (remoteVideoRef.current?.srcObject) {
+            const remoteStream = remoteVideoRef.current.srcObject as MediaStream
+            remoteStream.getTracks().forEach((track) => track.stop())
+        }
+
+        if (localVideoRef.current) {
+            localVideoRef.current.srcObject = null
+            localVideoRef.current.load() 
+        }
+        if (remoteVideoRef.current) {
+            remoteVideoRef.current.srcObject = null
+            remoteVideoRef.current.load() 
+        }
 
         callRef.current = null
         peerRef.current = null
-        localStreamRef.current = null
 
         dispatch(endCall())
     }, [])

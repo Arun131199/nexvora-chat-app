@@ -3,6 +3,7 @@ import Chats from "../pages/homePage/Chats";
 import Dashboard from "../pages/homePage/Dashboard";
 import Files from "../pages/homePage/Files";
 import Messages from "../pages/homePage/Messages";
+import OverallCalls from "../pages/homePage/overall_calls/OverallCalls";
 
 const mainHomeRoutes = [
     {
@@ -15,7 +16,17 @@ const mainHomeRoutes = [
             },
             {
                 path: "calls",
-                Component: Calls
+                Component: Calls,
+                children: [
+                    {
+                        index: true,
+                        Component: OverallCalls
+                    },
+                    {
+                        path: "over-all-calls",
+                        Components: OverallCalls
+                    }
+                ]
             },
             {
                 path: "messages",
@@ -24,7 +35,8 @@ const mainHomeRoutes = [
             {
                 path: "chats",
                 Component: Chats
-            }
+            },
+
         ]
     }
 ]

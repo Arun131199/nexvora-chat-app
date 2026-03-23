@@ -37,7 +37,18 @@ export default function CallWindow() {
         return () => clearInterval(timer)
     }, [callState.callStatus])
 
-    // ✅ Local camera — CallWindow mount ஆனா attach பண்ணு
+
+    useEffect(() => {
+        return () => {
+            if (localVideoRef.current?.srcObject) {
+                const stream = localVideoRef.current.srcObject as MediaStream
+                stream.getTracks().forEach((track) => track.stop())
+                localVideoRef.current.srcObject = null
+            }
+        }
+    }, [])
+
+  
     useEffect(() => {
         if (callState.callType !== "video") return
 
@@ -50,11 +61,16 @@ export default function CallWindow() {
                     localVideoRef.current.srcObject = stream
                 }
             })
-            .catch((err) => console.error("Local camera error:", err))
+            .catch((err) => console.error("Camera error:", err))
 
+       
         return () => {
-            // Cleanup — CallWindow unmount ஆனா stop பண்ணு
-            stream?.getTracks().forEach((t) => t.stop())
+            stream?.getTracks().forEach((t) => {
+                t.stop() 
+            })
+            if (localVideoRef.current) {
+                localVideoRef.current.srcObject = null
+            }
         }
     }, [callState.isInCall, callState.callType])
 
@@ -247,8 +263,8 @@ export default function CallWindow() {
                 <button
                     onClick={handleToggleMute}
                     className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${callState.isMuted
-                            ? "bg-red-500/20 border border-red-500 text-red-400"
-                            : "bg-[#1A1A1A] border border-gray-700 text-white hover:bg-[#2A2A2A]"
+                        ? "bg-red-500/20 border border-red-500 text-red-400"
+                        : "bg-[#1A1A1A] border border-gray-700 text-white hover:bg-[#2A2A2A]"
                         }`}
                 >
                     {callState.isMuted ? <MicOff size={20} /> : <Mic size={20} />}
@@ -258,8 +274,8 @@ export default function CallWindow() {
                     <button
                         onClick={handleToggleVideo}
                         className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${callState.isVideoOff
-                                ? "bg-red-500/20 border border-red-500 text-red-400"
-                                : "bg-[#1A1A1A] border border-gray-700 text-white hover:bg-[#2A2A2A]"
+                            ? "bg-red-500/20 border border-red-500 text-red-400"
+                            : "bg-[#1A1A1A] border border-gray-700 text-white hover:bg-[#2A2A2A]"
                             }`}
                     >
                         {callState.isVideoOff ? <VideoOff size={20} /> : <Video size={20} />}
@@ -269,8 +285,8 @@ export default function CallWindow() {
                 <button
                     onClick={handleScreenShare}
                     className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${callState.isScreenSharing
-                            ? "bg-[#4F6EF7]/20 border border-[#4F6EF7] text-[#4F6EF7]"
-                            : "bg-[#1A1A1A] border border-gray-700 text-white hover:bg-[#2A2A2A]"
+                        ? "bg-[#4F6EF7]/20 border border-[#4F6EF7] text-[#4F6EF7]"
+                        : "bg-[#1A1A1A] border border-gray-700 text-white hover:bg-[#2A2A2A]"
                         }`}
                 >
                     <Monitor size={20} />

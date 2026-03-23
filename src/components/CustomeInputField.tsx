@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
+interface Option {
+    id: number;
+    label: string;
+    value: string;
+}
+
 interface InputProps {
     label: string;
     type?: "text" | "password" | "email" | "number";
     isDropdown?: boolean;
     mainStyle?: string;
     placeholder?: string;
-    options?: any[];
-    onChangeInput: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+    options?: Option[];
+    onChangeInput: (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => void;
     icon?: React.ReactNode;
     name: string;
-    onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function CustomeInputField({
@@ -24,51 +32,62 @@ export default function CustomeInputField({
     options = [],
     onChangeInput,
     icon,
-    onBlur
+    onBlur,
 }: InputProps) {
-
     const [showPassword, setShowPassword] = useState(false);
-
     const isPassword = type === "password";
 
     return (
         <section className={`flex flex-col gap-1 ${mainStyle}`}>
-            <label htmlFor={label} className="text-lg text-gray-100 text-left w-full">
+            {/* Label */}
+            <label
+                htmlFor={name}
+                className="text-sm text-gray-300 text-left w-full"
+            >
                 {label}
             </label>
 
+            {/* Dropdown */}
             {isDropdown ? (
                 <select
-                    id={label}
-                    className="p-2 rounded-md bg-[#020617] border border-gray-600 text-white"
+                    id={name}
+                    name={name}
+                    className="p-2 rounded-md bg-[#020617] border border-gray-600 text-white focus:border-[#8440fd] outline-none"
                     onChange={onChangeInput}
+                    defaultValue=""
                 >
-                    {options.map((opt, i) => (
-                        <option key={i}>{opt}</option>
+                    {/* Placeholder option */}
+                    <option value="" disabled>
+                        {placeholder || "Select option"}
+                    </option>
+
+                    {options.map((opt) => (
+                        <option key={opt.id} value={opt.value}>
+                            {opt.label}
+                        </option>
                     ))}
                 </select>
             ) : (
-                <div className="flex items-center border border-gray-600 rounded-md bg-[#020617] px-2 focus-within:border-blue-500">
-                    {icon && (
-                        <span className="text-gray-400 mr-2">
-                            {icon}
-                        </span>
-                    )}
+                /* Input */
+                <div className="flex items-center border border-gray-600 rounded-md bg-[#020617] px-2 focus-within:border-[#8440fd] transition">
+
+                    {icon && <span className="text-gray-400 mr-2">{icon}</span>}
 
                     <input
-                        id={label}
+                        id={name}
                         name={name}
                         type={isPassword ? (showPassword ? "text" : "password") : type}
                         placeholder={placeholder}
                         onChange={onChangeInput}
-                        className="w-full p-2 bg-transparent text-white outline-none focus:none"
                         onBlur={onBlur}
+                        className="w-full p-2 bg-transparent text-white outline-none"
                     />
+
                     {isPassword && (
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="text-gray-400 ml-2"
+                            className="text-gray-400 ml-2 hover:text-white"
                         >
                             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                         </button>
